@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ProductCategory extends Model
+class Product extends Model
 {
-    protected $fillable = [
-        'title', 'description', 'price'
-    ];
+    use HasFactory;
 
     public function orders()
     {
