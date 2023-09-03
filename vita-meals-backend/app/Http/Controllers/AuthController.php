@@ -18,7 +18,7 @@ class AuthController extends Controller
         $this->authService = new AuthService();
     }
 
-    public function login(Request $request)
+    public function signin(Request $request)
     {
         $request->validate([
             'email' => 'required|string|email',
@@ -49,7 +49,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request)
+    public function signup(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -72,7 +72,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout()
+    public function signout()
     {
         $this->authService->logout();
 
