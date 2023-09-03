@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,5 +36,14 @@ Route::middleware('auth:api')->group(function() {
     Route::controller(AuthController::class)->group(function () {
         Route::post('signout', 'signout');
         Route::post('refresh', 'refresh');
+    });
+
+    Route::controller(CartController::class)->prefix('cart')->group(function () {
+        Route::get('/{userId}', 'index');
+        Route::post('/store', 'store');
+        Route::post('/update', 'updateQty');
+        Route::post('/removeitem', 'destroyACartItem');
+        Route::post('/checkout', 'checkout');
+        Route::post('/remove', 'destroy');
     });
 });
