@@ -32,7 +32,7 @@ Route::controller(ProductController::class)->prefix('products')->group(function 
     Route::post('/', 'search');
 });
 
-Route::middleware('auth:api')->group(function() {
+Route::middleware('auth:sanctum')->group(function() {
     Route::controller(AuthController::class)->group(function () {
         Route::post('signout', 'signout');
         Route::post('refresh', 'refresh');

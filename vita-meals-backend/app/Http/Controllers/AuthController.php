@@ -26,15 +26,13 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-
-        $token = $this->authService->fetchAuthToken($credentials);
-
-        if (!$token) {
+        if (!Auth::attempt($credentials)) {
             return response()->json([
                 'error' => true,
                 'message' => 'Unauthorized',
             ], 401);
         }
+        $token = $this->authService->fetchAuthToken();
 
         $user = $this->authService->fetchAuthenticatedUser();
 

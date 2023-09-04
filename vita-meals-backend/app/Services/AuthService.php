@@ -12,10 +12,10 @@ class AuthService
         return Auth::user();
     }
 
-    public function fetchAuthToken(array $credentials)
+    public function fetchAuthToken()
     {
-        $token = Auth::attempt($credentials);
-
+        $user = Auth::user();
+        $token = $user->createToken('AppName')->plainTextToken;
         return $token;
     }
 
@@ -26,7 +26,7 @@ class AuthService
 
     public function fetchTokenExpirationTime()
     {
-        return Config::get('jwt.ttl');
+        return 200;
     }
 
     public function logout()

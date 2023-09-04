@@ -82,7 +82,7 @@ class CartController extends Controller
         $quantity = (int) $request->quantity;
 
         $affectedRows = $this->cartItemService->update($cartId, $productId, $quantity);
-
+        
         if ($affectedRows) {
             return response()->json([
                 'error' => false,
