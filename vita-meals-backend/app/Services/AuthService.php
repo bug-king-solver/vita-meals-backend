@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Laravel\Sanctum\PersonalAccessToken;
+use Carbon\Carbon;
 
 class AuthService
 {
@@ -22,12 +23,17 @@ class AuthService
 
     public function refreshToken()
     {
-        return Auth::refresh();
+        $user = Auth::user();
+        $user->tokens->each(function ($token) {
+            $token->delete();
+        });
+
+        return $this->fetchAuthToken();
     }
 
     public function fetchTokenExpirationTime()
     {
-        return 200;
+        return Carbon::now()->addHours(2);
     }
 
     public function logout()

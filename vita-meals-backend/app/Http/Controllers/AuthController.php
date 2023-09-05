@@ -82,6 +82,9 @@ class AuthController extends Controller
 
     public function refresh()
     {
+        if (!Auth::check()) {
+            // Authenticate the user here using Auth::attempt or other methods
+        }
         return response()->json([
             'error' => false,
             'user' => $this->authService->fetchAuthenticatedUser(),
