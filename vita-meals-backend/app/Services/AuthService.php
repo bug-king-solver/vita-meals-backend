@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthService
 {
@@ -31,6 +32,10 @@ class AuthService
 
     public function logout()
     {
-        Auth::logout();
+        $user = Auth::user();
+        // Revoke all of the user's tokens (log them out from all devices).
+        $user->tokens->each(function (PersonalAccessToken $token) {
+            $token->delete();
+        });
     }
 }
