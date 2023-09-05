@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Services\CartItemService;
 use App\Services\CartService;
+use App\Mail\OrderMail;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -99,9 +103,20 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         $cartId = (int) $request->cart_id;
-
+        $data = Cart::find($cartId)->cartItems->map(function ($cartItem) {
+            return [
+                'title' => $cartItem->product->title,
+                'quantity' => $cartItem->quantity,
+                'price' => $cartItem->product->price,
+                'total' => $cartItem->quantity * $cartItem->product->price,
+            ];
+        });
+        $totalPrice = $data->sum('total');
         $affectedRows = $this->cartSevice->update($cartId);
-
+        $emailAddress = Auth::user()->email;
+        Mail::to($emailAddress)->send(
+            new OrderMail($data, $totalPrice)
+        );
         if ($affectedRows) {
             return response()->json([
                 'error' => false,
