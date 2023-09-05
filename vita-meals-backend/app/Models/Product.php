@@ -10,8 +10,8 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function carts()
+    public function cartItems(): HasMany
     {
-        return $this->hasMany(Cart::class);
+        return $this->hasMany(CartItem::class);
     }
 }
