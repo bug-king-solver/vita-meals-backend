@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CartItem extends Model
 {
-    // use HasFactory;
+    use HasFactory;
     /**
      * The attributes that should be cast.
      *
