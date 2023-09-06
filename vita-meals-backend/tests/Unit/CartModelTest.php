@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class CartTest extends TestCase
+class CartModelTest extends TestCase
 {
     use RefreshDatabase;
 
