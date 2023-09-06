@@ -17,8 +17,8 @@ class CartItemFactory extends Factory
      */
     public function definition(): array
     {
-        $cart = Cart::inRandomOrder()->first();
-        $product = Product::inRandomOrder()->first();
+        $cart = Cart::factory()->create();
+        $product = Product::factory()->create();
         return [
             'cart_id' => $cart->id,
             'product_id' => $product->id,

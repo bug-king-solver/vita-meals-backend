@@ -9,7 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Product extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'title',
+        'description',
+        'image_url',
+        'price',
+    ];
     public function cartItems(): HasMany
     {
         return $this->hasMany(CartItem::class);
