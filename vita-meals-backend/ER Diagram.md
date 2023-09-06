@@ -73,39 +73,34 @@
 ### ER Diagram:
 
 ```
-+------------------+       +------------------+
-|      User        |       |       Cart       |
-+------------------+       +------------------+
-| id (PK)          |<----->| id (PK)          |
-| name             |       | user_id (FK)     |
-| email            |       | is_active         |
-| password (hashed)|       +------------------+
-| created_at       |
-| updated_at       |
-+------------------+
-         |
-         |
-         |
-         v
-+------------------+
-|    CartItem      |
-+------------------+
-| id (PK)          |
-| cart_id (FK)     |
-| product_id (FK)  |
-| quantity         |
-+------------------+
-         |
-         |
-         |
-         v
-+------------------+
-|     Product      |
-+------------------+
-| id (PK)          |
-| name             |
-| description      |
-| price            |
-+------------------+
++-------------------+           +-------------------+
+|      users        |           |     products      |
++-------------------+           +-------------------+
+| id (PK)           |           | id (PK)           |
+| name              |           | title             |
+| email             |           | description       |
+| email_verified_at |           | image_url         |
+| password          |           | price             |
+| remember_token    |           +-------------------+
+| created_at        |
+| updated_at        |
++-------------------+
+
+    |                             |            |
+    | has many                    | has many   |
+    |                             |            |
+    v                             v            v
+
++-------------------+ has  many +-------------------+
+|       carts       |---------->|    cart_items     |
++-------------------+           +-------------------+
+| id (PK)           |           | id (PK)           |
+| user_id (FK)      |           | cart_id (FK)      |
+| is_active         |           | product_id (FK)   |
+| created_at        |           | quantity          |
+| updated_at        |           | created_at        |
+|                   |           | updated_at        |
++-------------------+           +-------------------+
+
 
 ```
