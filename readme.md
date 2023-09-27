@@ -33,3 +33,26 @@ Documentation of the code using DocBlock is required.
 - Creation of an ER model.
 - Testing.
 - Docker environment for running the application.
+
+# Getting started
+
+For manually starting:
+
+install docker desktop
+
+```bash
+cd into the laravel folder
+
+run docker-compose up
+
+run docker-compose exec laravel composer install
+
+run docker-compose exec laravel composer dump-autoload
+
+run docker-compose exec laravel php artisan migrate:fresh
+
+cd into vue folder
+
+run npm install && npm run dev
+
+```
