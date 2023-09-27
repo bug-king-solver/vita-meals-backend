@@ -53,6 +53,6 @@ run docker-compose exec laravel php artisan migrate:fresh
 
 cd into vue folder
 
-run npm install && npm run dev
+run yarn install && npm yarn dev
 
 ```
